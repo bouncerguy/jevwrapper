@@ -24,7 +24,7 @@ async function body(req) {
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw new WrapperError('Request body must be valid JSON.'); }
 }
 function authorize(req) {
-  if (!liveAvailable) throw new WrapperError('Live mode is not configured. Explore the recorded sample or self-host with your own keys.',503);
+  if (!liveAvailable) throw new WrapperError('Live mode is not configured. Explore the illustrative sample or self-host with your own keys.',503);
   const a=Buffer.from(req.headers.authorization || ''); const b=Buffer.from(`Bearer ${ownerToken}`);
   if (a.length !== b.length || !timingSafeEqual(a,b)) throw new WrapperError('Enter the owner access token to use live mode.',401);
   const origin=req.headers.origin;
@@ -53,7 +53,7 @@ export const server=http.createServer(async(req,res)=>{
       if(!(req.headers['content-type']||'').startsWith('application/json'))throw new WrapperError('Use application/json.',415);
       authorize(req);rateLimit(req);
       const input=await body(req);
-      if(!input || typeof input!=='object' || input.mode==='demo')throw new WrapperError('Use the recorded browser sample for demo mode.');
+      if(!input || typeof input!=='object' || input.mode==='demo')throw new WrapperError('Use the illustrative browser sample for demo mode.');
       const result=path==='/api/interpret'?await interpret(input):await decide(input);
       json(res,200,result);return;
     }

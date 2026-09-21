@@ -208,14 +208,18 @@ async function interpret(clarification = '') {
     if (state.plan?.clarifications.length) history.push({ role: 'assistant', content: state.plan.clarifications.join('\n') });
     history.push({ role: 'user', content: clarification });
   }
+  if (history.length > 10) {
+    announce('This request has reached its clarification limit. Put the resolved criteria into the main request, then make a new plan. Earlier answers have been preserved.');
+    return;
+  }
   setBusy(true, 'Translating your request into explicit questions…');
   const revision = state.revision;
   try {
-    const data = await api('interpret', { message, context, history: history.slice(-10) });
+    const data = await api('interpret', { message, context, history });
     if (revision !== state.revision) return;
     if (data.mode !== 'live') throw new Error('The server did not return a live interpretation. No result has been accepted.');
     state.plan = validateClientPlan(data.plan);
-    state.history = history.slice(-10);
+    state.history = history;
     $('clarification-answer').value = '';
     renderPlan();
     announce(state.plan.clarifications.length ? 'The interpreter needs more information before JEV can evaluate this request.' : 'Plan ready. Review the exact questions and option criteria before running JEV.');
@@ -271,7 +275,7 @@ function renderResults() {
 }
 async function decide() {
   if (state.busy || !state.plan) return;
-  if (!$('plan-editor').hidden && $('plan-json').value !== JSON.stringify(state.plan, null, 2)) { announce('Apply your JSON edits before running the decision.'); return; }
+  if ($('plan-json').value !== JSON.stringify(state.plan, null, 2)) { announce('Apply your JSON edits before running the decision.'); return; }
   if (state.plan.clarifications.length) { announce('Answer the clarification questions before running JEV.'); return; }
   const threshold = Number($('confidence-threshold').value) / 100;
   if (state.mode === 'demo') {
@@ -285,6 +289,8 @@ async function decide() {
     announce('Illustrative results loaded. No AI call was made.');
     return;
   }
+  state.result = null;
+  $('results-section').hidden = true;
   if (!canUseLive()) return;
   setBusy(true, 'JEV is evaluating your reviewed questions…');
   const revision = state.revision;
