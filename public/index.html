@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#efeee8">
+  <meta name="description" content="Turn plain English into explicit, reviewable decision workflows with JEV. An open-source bridge from human intent to typed answers. MIT licensed, by Ken Cox.">
+  <link rel="canonical" href="https://kencox.com/jevwrapper/">
+  <meta property="og:title" content="JEV Wrapper — Human in. Precision out.">
+  <meta property="og:description" content="Plain English. Explicit criteria. Structured decisions. An open-source conversational layer for JEV.">
+  <meta property="og:url" content="https://kencox.com/jevwrapper/">
+  <meta property="og:type" content="website">
+  <title>JEV Wrapper — Human in. Precision out.</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#sandbox">Skip to decision sandbox</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="#" class="wordmark" aria-label="JEV Wrapper home"><span class="brand-symbol" aria-hidden="true">j<span>↗</span></span>jev<span class="wordmark-light">wrapper</span><span class="version">v0.1.0</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#start">Run it yourself</a>
+        <a class="github-link" href="https://github.com/bouncerguy/jevwrapper" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> OPEN SOURCE. HUMAN FIRST.</p>
+        <h1 id="hero-heading">Human in.<br><span>Precision out.</span></h1>
+        <p class="hero-description">You speak English. JEV speaks decisions.<br>One small wrapper makes the connection.</p>
+        <p class="hero-subcopy">Turn everyday requests into explicit criteria, typed questions, and structured answers you can actually use.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#sandbox">Explore the sandbox <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/bouncerguy/jevwrapper" target="_blank" rel="noopener noreferrer">Get the source <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-footnote"><span>MIT licensed</span><span>Bring your own keys</span><span>Built by Ken Cox</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of an English request becoming a typed decision">
+        <div class="visual-topline"><span><i class="tiny-dot"></i> ENGLISH → STRUCTURE</span><span>01 / 03</span></div>
+        <div class="request-bubble"><span class="mono-label">YOUR WORDS</span><p>“Route this customer request<br>and tell me if it’s urgent.”</p><span class="bubble-cursor" aria-hidden="true">_</span></div>
+        <div class="flow-connector" aria-hidden="true"><span></span><b>↓</b><span></span></div>
+        <div class="code-card">
+          <div class="code-header"><span class="orange-square" aria-hidden="true"></span><span>decision.json</span><span class="code-badge">TYPED OUTPUT</span></div>
+          <pre aria-label="Illustrative structured output"><code><span class="syntax-dim">{</span>
+  <span class="syntax-key">"department"</span>: <span class="syntax-value">"billing"</span>,
+  <span class="syntax-key">"urgent_probability"</span>: <span class="syntax-bool">0.64</span>,
+  <span class="syntax-key">"status"</span>: <span class="syntax-value">"needs_review"</span>
+<span class="syntax-dim">}</span></code></pre>
+          <div class="code-footer"><span class="status-dot"></span> Explicit answers. Visible uncertainty.</div>
+        </div>
+        <div class="visual-caption"><span class="spark" aria-hidden="true">✳</span> A conversation with a contract.<span class="mono-label">ILLUSTRATIVE EXAMPLE</span></div>
+      </div>
+    </section>
+
+    <div class="principles-bar"><div class="wrap principles-inner"><span><b>01</b> Describe the intent</span><span class="bar-arrow" aria-hidden="true">→</span><span><b>02</b> Review the criteria</span><span class="bar-arrow" aria-hidden="true">→</span><span><b>03</b> Get a typed decision</span><span class="principle-note">No hidden leap from words to action.</span></div></div>
+
+    <section id="sandbox" class="sandbox-section wrap" aria-labelledby="sandbox-heading">
+      <div class="section-heading"><div><p class="eyebrow">THE DECISION SANDBOX</p><h2 id="sandbox-heading">From “I need…” to exactly that.</h2></div><div class="service-status" id="service-status" role="status"><span class="status-dot muted-dot"></span> Checking live service</div></div>
+      <p class="section-intro">See the questions before you trust the answers. Start with a illustrative example, or connect to this instance’s live service.</p>
+      <div class="workspace">
+        <div class="request-panel">
+          <div class="panel-topline"><span class="panel-step">01</span><h3>Make yourself understood.</h3></div>
+          <div class="mode-tabs" role="group" aria-label="Sandbox mode"><button id="mode-live" class="mode-tab active" type="button" aria-pressed="true">Your request</button><button id="mode-demo" class="mode-tab" type="button" aria-pressed="false">Illustrative demo <span>NO KEYS</span></button></div>
+          <div id="mode-notice" class="mode-notice">Live mode uses this server’s configured LLM and JEV accounts. Your text is sent to those providers when you run it.</div>
+          <div class="template-row"><span class="field-caption">START WITH</span><div class="template-buttons" role="group" aria-label="Example workflows"><button class="template-chip" type="button" data-template="support">Support triage</button><button class="template-chip" type="button" data-template="content">Content routing</button><button class="template-chip" type="button" data-template="priority">Priority scoring</button></div></div>
+          <form id="request-form">
+            <label class="field-label" for="request">What should JEV decide?<span>Plain English</span></label>
+            <textarea id="request" rows="4" maxlength="6000" placeholder="Route each support request to billing, technical support, or account management. Flag it as urgent if the customer cannot use a service they paid for." required></textarea>
+            <label class="field-label context-label" for="context">What information should it consider?<span>Context</span></label>
+            <textarea id="context" class="context-input" rows="5" maxlength="20000" placeholder="Paste a message, document excerpt, or the facts you want evaluated."></textarea>
+            <details class="access-details" id="access-details"><summary>Owner access <span id="auth-indicator">Optional</span></summary><div class="access-inner"><label class="field-label" for="access-token">Instance access token</label><input id="access-token" type="password" autocomplete="off" placeholder="Token for this hosted instance"><p>Kept only in this tab’s memory and sent to this server. Provider API keys belong on your server, never here.</p></div></details>
+            <button id="interpret-button" class="button button-orange full-width" type="submit"><span>1. Make a decision plan</span><span aria-hidden="true">→</span></button>
+          </form>
+          <p class="input-footnote">You review the plan. JEV evaluates the questions.<br>This wrapper does not carry out external actions.</p>
+        </div>
+        <div class="decision-panel" id="decision-panel">
+          <div class="panel-topline"><span class="panel-step">02</span><h3>See the decision take shape.</h3><span class="provenance-badge" id="provenance-badge">AWAITING INPUT</span></div>
+          <div id="empty-state" class="empty-state"><div class="empty-symbol" aria-hidden="true"><span>{</span><i>✳</i><span>}</span></div><h4>A little structure goes a long way.</h4><p>Your request becomes a plan you can inspect, edit, and approve before JEV evaluates it.</p><div class="empty-types"><span>CHOICE</span><span>SCORE</span><span>TRUTH ESTIMATE</span></div><button type="button" id="try-demo" class="text-link">Try a illustrative example <span aria-hidden="true">↗</span></button></div>
+          <div id="plan-area" hidden>
+            <div class="plan-summary"><span class="mono-label">INTERPRETED INTENT</span><p id="plan-summary"></p></div>
+            <div id="clarifications" class="clarification-box" hidden><h4>A detail to settle first</h4><ul id="clarification-list"></ul><label for="clarification-answer" class="field-label">Your clarification</label><textarea id="clarification-answer" rows="3" placeholder="Add the missing criteria or context…"></textarea><button type="button" id="clarify-button" class="button button-dark">Update the plan <span aria-hidden="true">→</span></button></div>
+            <div class="questions-heading"><span class="mono-label">EXPLICIT QUESTIONS</span><button type="button" id="edit-plan-toggle" class="small-link" aria-expanded="false" aria-controls="plan-editor">Edit JSON</button></div>
+            <div id="questions" class="question-list"></div>
+            <div id="plan-editor" class="plan-editor" hidden><label class="field-label" for="plan-json">Decision plan JSON</label><textarea id="plan-json" rows="14" spellcheck="false"></textarea><p>Edit the criteria or allowed options before running. All questions must have a unique ID and a supported type.</p><button type="button" id="save-plan" class="button button-small button-outline">Apply changes</button></div>
+            <div class="run-controls"><label for="confidence-threshold">Review below <output id="threshold-value" for="confidence-threshold">70%</output></label><input type="range" id="confidence-threshold" min="50" max="99" value="70"><p>Uses provider confidence for choices and scores; distance from 50% for truth estimates. Neither guarantees correctness.</p><button type="button" id="decide-button" class="button button-dark full-width"><span>2. Run with JEV</span><span aria-hidden="true">↗</span></button></div>
+          </div>
+          <div id="message-box" class="message-box" role="status" aria-live="polite" hidden></div>
+        </div>
+      </div>
+      <section id="results-section" class="results-section" aria-labelledby="results-heading" hidden>
+        <div class="results-topline"><div><p class="eyebrow">THE ANSWER, WITH THE DETAILS</p><h3 id="results-heading">Decisions you can work with.</h3></div><span id="results-mode" class="provenance-badge"></span></div>
+        <p id="result-summary" class="result-summary"></p><div id="result-cards" class="result-cards"></div>
+        <div id="results-provenance" class="results-provenance"></div>
+        <details class="raw-output"><summary>Inspect the complete JSON <span aria-hidden="true">{ }</span></summary><div class="json-actions"><button id="copy-json" type="button" class="button button-small button-outline">Copy JSON</button><button id="download-json" type="button" class="button button-small button-outline">Download JSON ↓</button></div><pre><code id="result-json"></code></pre></details>
+      </section>
+    </section>
+
+    <section id="how-it-works" class="how-section"><div class="wrap"><div class="how-heading"><div><p class="eyebrow">A SMALL BRIDGE. A CLEAR CONTRACT.</p><h2>Language is flexible.<br>Your decision rules shouldn’t be.</h2></div><p>The conversational model helps express the task. JEV evaluates the structured questions. You can inspect the handoff between them.</p></div><div class="how-grid"><article><span class="how-number">01 / TRANSLATE</span><h3>Intent becomes a plan.</h3><p>A small language model turns your English into typed questions and allowed answers. Missing criteria become follow-up questions.</p><span class="how-tag">English → structured plan</span></article><article><span class="how-number">02 / EVALUATE</span><h3>JEV gets the specifics.</h3><p>Review the plan, adjust the criteria, then send the questions and context to JEV for evaluation. The questions define what it judges.</p><span class="how-tag">Explicit inputs → typed results</span></article><article><span class="how-number">03 / INSPECT</span><h3>Keep the human in it.</h3><p>Read the results and available confidence. Low-confidence or ambiguous answers get a review flag. Export the full response for your workflow.</p><span class="how-tag">Clear answers + visible uncertainty</span></article></div></div></section>
+
+    <section id="start" class="start-section wrap"><div class="start-copy"><p class="eyebrow">YOURS TO RUN. YOURS TO BUILD ON.</p><h2>A useful idea.<br>An open starting point.</h2><p>Run your own instance with your LLM and JEV API keys. Keep your credentials server-side, define the decision rules, and build the interface your team needs.</p><div class="start-links"><a class="button button-dark" href="https://github.com/bouncerguy/jevwrapper" target="_blank" rel="noopener noreferrer">Explore the repository <span aria-hidden="true">↗</span></a><a class="text-link" href="https://docs.typesafe.ai/" target="_blank" rel="noopener noreferrer">JEV documentation ↗</a></div><p class="ownership-note">MIT license · Node.js · Vanilla frontend · No build step</p></div><div class="quickstart"><div class="code-header"><span class="orange-square" aria-hidden="true"></span><span>YOUR TERMINAL</span><button id="copy-quickstart" class="terminal-copy" type="button">Copy</button></div><pre><code id="quickstart-code">git clone https://github.com/bouncerguy/jevwrapper.git
+cd jevwrapper
+cp .env.example .env
+# Add your API keys and access token to .env
+npm start</code></pre><div class="quickstart-note"><span aria-hidden="true">↳</span> Setup, security notes, and API examples are in the README.</div></div></section>
+
+    <section class="closing-strip wrap"><span class="closing-symbol" aria-hidden="true">✳</span><p>Make the conversation natural.<br><strong>Make the decision explicit.</strong></p><a href="#sandbox" class="closing-link" aria-label="Back to sandbox">↗</a></section>
+  </main>
+  <footer class="site-footer wrap"><a href="https://kencox.com" class="footer-credit">A Ken Cox project <span aria-hidden="true">↗</span></a><p>Independent open-source project. Not affiliated with or endorsed by TypeSafe.</p><div><a href="https://github.com/bouncerguy/jevwrapper/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a><a href="https://github.com/bouncerguy/jevwrapper/issues" target="_blank" rel="noopener noreferrer">Feedback ↗</a></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
